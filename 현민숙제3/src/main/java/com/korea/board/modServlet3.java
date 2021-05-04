@@ -1,4 +1,4 @@
-package com.koreait.board;
+package com.korea.board;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -7,39 +7,39 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet("/mod2")
-public class ModServlet2 extends HttpServlet {
+@WebServlet("/mod3")
+public class modServlet3 extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		String iboard = request.getParameter("iboard");
 		
-		
-		BoardVO2 bo = BoardDAO.selBoard(Integer.parseInt(iboard));
-		
-		request.setAttribute("data", bo);
-		
-		String jsp = "WEB-INF/view/mod2.jsp";
-		request.getRequestDispatcher(jsp).forward(request, response);
+		BoardVO3 data = BoardDAO.selBoard(Integer.parseInt(iboard));
+		request.setAttribute("data", data);
 	
+		String jsp = "/WEB-INF/view/mod3.jsp";
+		request.getRequestDispatcher(jsp).forward(request, response);
+		
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		String iboard = request.getParameter("iboard");
 		String title = request.getParameter("title");
+		String iboard = request.getParameter("iboard");
 		String ctnt = request.getParameter("ctnt");
 		
-		BoardVO2 bo = new BoardVO2();
-		bo.setTitle(title);
-		bo.setCtnt(ctnt);
-		bo.setIboard(Integer.parseInt(iboard));
+		int INTIBOARD = Integer.parseInt(iboard);
 		
-		BoardDAO.UpdateBoard(bo);
-		response.sendRedirect("/detail2?iboard="+iboard);
+		BoardVO3 vo = new BoardVO3();
+		vo.setTitle(title);
+		vo.setCtnt(ctnt);
+		vo.setIboard(INTIBOARD);
 		
+		BoardDAO.Upload(vo);
+		
+		response.sendRedirect("/detail3?iboard=" +iboard);
+		
+	}
 
-}
-	
 }
