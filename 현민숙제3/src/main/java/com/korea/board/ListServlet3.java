@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 
-@WebServlet("/list3")
+@WebServlet("/list3") 
 public class ListServlet3 extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -19,11 +19,13 @@ public class ListServlet3 extends HttpServlet {
 
 		List<BoardVO3> list = BoardDAO.AllSelect();
 		request.setAttribute("list", list);
+				
+		MyUtils.openJsp("list3", request, response);
 		
 		
-			
-		String jsp = "/WEB-INF/view/list3.jsp";
-		request.getRequestDispatcher(jsp).forward(request, response);
+		
+		
+		//request.getRequestDispatcher(jsp).forward(request, response);
 		
 	}
 
