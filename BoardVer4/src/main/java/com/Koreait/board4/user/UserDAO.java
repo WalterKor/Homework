@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
+import org.mindrot.jbcrypt.BCrypt;
+
 import com.Koreait.board4.DBUtils;
 
 public class UserDAO {
@@ -33,8 +35,7 @@ public class UserDAO {
 	}
 	
 	
-	//로그인 성공 : 1, 아이디 없음 : 2, 비밀번호 틀림 : 3, 에러 : 0
-	
+	//로그인 성공 : 1, 아이디 없음 : 2, 비밀번호 틀림 : 3, 에러 : 0	
 	public static int loginUser(UserVO param) {
 		
 		Connection con = null;
@@ -52,8 +53,16 @@ public class UserDAO {
 			rs = ps.executeQuery();
 			
 			if(rs.next()) {
-				String dbpw = rs.getString("upw");
-				if(dbpw.equals(param.getUpw())){					
+				//암호화가 된거 
+				String dbpw = rs.getString("upw"); //rs.getString 레코드에서 달라고한다.
+								//암호화가 안된거 	  //된거
+				if(BCrypt.checkpw(param.getUpw(), dbpw)){					
+					int iuser = rs.getInt("iuser");
+					String unm = rs.getString("unm");
+					
+					param.setIuser(iuser);
+					param.setUnm(unm);
+					
 					return 1;
 				}else {
 					return 3;

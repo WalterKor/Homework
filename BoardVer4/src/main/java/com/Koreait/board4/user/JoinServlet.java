@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.catalina.User;
+import org.mindrot.jbcrypt.BCrypt;
 
 import com.Koreait.board4.MyUtils;
 
@@ -25,20 +26,27 @@ public class JoinServlet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		UserVO vo = new UserVO();	
-		vo.setUid(request.getParameter("uid"));
-		vo.setUpw(request.getParameter("upw"));
-		vo.setUnm(request.getParameter("unm"));
+		UserVO vo = new UserVO();
+		String uid = request.getParameter("uid");
+		String upw = request.getParameter("upw");
+		String unm = request.getParameter("unm");
+		
+		String hashedUpw = BCrypt.hashpw(upw, BCrypt.gensalt());
+				
+		vo.setUid(uid);
+		vo.setUpw(hashedUpw);
+		vo.setUnm(unm);
 		vo.setGender(MyUtils.getParamInt("gender", request));
 //		int gender = MyUtils.getParamInt("gender", request);
 //		vo.setGender(gender);
-		
+		 	
+		 
 		UserDAO.joinUser(vo);
 		
 		System.out.println("userId : "+vo.getUid());
 		System.out.println("userPw : "+vo.getUpw());
 		System.out.println("userNm : "+vo.getUnm());
-		System.out.println("userGender :" +vo.getGender());
+		System.out.println("userGender :"	  +vo.getGender());
 	
 		response.sendRedirect("login");
 	}

@@ -5,10 +5,18 @@
 <head>
 <meta charset="UTF-8">
 <title>로그인</title>
+<style type="text/css">
+	.errMsg{ color: red};
+	body{
+		background-color: coral;
+	}
+</style>
 </head>
+
 <body>
 	<div>
-		<div>
+	<div class="errMsg">${errMsg}</div> <!--페이지컨텍스 리퀘스트 세션 어플리케이션 EL식  -->
+		<div>							
 			<form action="/user/login" method="post">
 				<div><input type="text" name="uid" placeholder="아이디"></div>
 				<div><input type="password" name="upw" placeholder="비밀번호"></div>
@@ -23,3 +31,4 @@
 	</div>
 </body>
 </html>
+
