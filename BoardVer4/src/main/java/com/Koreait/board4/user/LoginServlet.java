@@ -21,7 +21,7 @@ public class LoginServlet extends HttpServlet {
 		//로그인이 되어있는 상태인지 아닌지 확인하고 
 		HttpSession hs = request.getSession();
 		UserVO loginUser = (UserVO)hs.getAttribute("loginUser");
-		if(loginUser != null) {
+		if(loginUser != null) { //로그인 상태 
 			response.sendRedirect("/board/list");
 			return;
 		}
@@ -44,9 +44,12 @@ public class LoginServlet extends HttpServlet {
 		
 		if(result == 1 ) {
 			
+			
 			HttpSession hs = request.getSession();
 			
+			//질문
 			vo.setUpw(null);
+			
 			hs.setAttribute("loginUser", vo); 
 		 
 			//vo가 가리키는 UserVO객체는 (iuser, uid, unm값만 담고 있다.)

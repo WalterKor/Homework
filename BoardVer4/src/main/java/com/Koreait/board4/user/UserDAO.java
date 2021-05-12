@@ -65,10 +65,10 @@ public class UserDAO {
 					
 					return 1;
 				}else {
-					return 3;
+					return 3; //비밀번호가 다름 
 				}
 			}else {
-				return 2;
+				return 2; //아이디가 없음
 			}
 				
 		} catch (Exception e) {

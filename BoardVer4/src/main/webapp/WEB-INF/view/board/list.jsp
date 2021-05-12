@@ -36,13 +36,20 @@
 			</tr>
 			
 			<c:forEach var ="item" items="${list}">
-				<tr class="record" onclick="moveToDetail">
-					<td>${item.iboard}</td>
-					<td>${item.title}</td>
-					<td>${item.unm}</td>
-					<td>${item.regdt}</td>
-				</tr>			
+					<tr class="record" onclick="moveToDetail(${item.iboard})">
+						<td>${item.iboard}</td>
+						<td>${item.title}</td>
+						<td>${item.unm}</td>
+						<td>${item.regdt}</td>
+					</tr>			
 			</c:forEach>
 		</table>
+		<script >
+			function moveToDetail(iboard) {
+				//띄워쓰기 주의
+				location.href='/board/detail?iboard=' +iboard ;
+				
+			}
+		</script>
 	</div>
 </html>

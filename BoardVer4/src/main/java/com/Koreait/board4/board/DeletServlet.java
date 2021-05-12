@@ -1,4 +1,4 @@
-package com.korea.board;
+package com.Koreait.board4.board;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -7,17 +7,29 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet("/del3")
-public class DelServlet3 extends HttpServlet {
+import com.Koreait.board4.MyUtils;
+
+
+@WebServlet("/board/del")
+public class DeletServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
+    
+	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	
+		int iboard = MyUtils.getParamInt("iboard", request);
+		int iuser = MyUtils.getLoginUserPk(request);
 		
-		String iboard = request.getParameter("iboard");
-		int INTIBOARD = Integer.parseInt(iboard);
-		BoardDAO.remove(INTIBOARD);
+		BoardVo bo = new BoardVo();
 		
-		response.sendRedirect("/list3");
+		bo.setIboard(iboard);
+		bo.setIuser(iuser);
+		
+		BoardDAO.remove(bo);
+		response.sendRedirect("/board/list");
+		
+		
 	}
 
 	

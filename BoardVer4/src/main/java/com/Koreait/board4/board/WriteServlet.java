@@ -37,10 +37,13 @@ public class WriteServlet extends HttpServlet {
 		
 		String title = request.getParameter("title");
 		String ctnt = request.getParameter("ctnt");
-		
+		/*
 		HttpSession hs = request.getSession();
 		UserVO loginUser =(UserVO)hs.getAttribute("loginUser");
-		int iuser =  loginUser.getIuser();
+		int iuser = loginUser.getIuser();
+		*/
+	
+		int iuser =  MyUtils.getLoginUserPk(request);
 			
 		BoardVo param = new BoardVo();
 		param.setTitle(title);

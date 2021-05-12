@@ -26,7 +26,7 @@ public class ListServlet extends HttpServlet {
 	 UserVO loginUser =(UserVO)hs.getAttribute("loginUser");
 	 //로그인을 했으면 board/list.jsp응답
 	 
-	 if(loginUser == null) {
+	 if(loginUser == null) {//로그아웃상태면 로그인페이지로 이동한다.
 		 response.sendRedirect("/user/login");
 		 return;
 	 }
