@@ -12,6 +12,17 @@ import org.apache.catalina.User;
 import com.Koreait.board4.user.UserVO;
 
 public class MyUtils {
+	
+	public  static void gotoLogin(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		HttpSession hs = request.getSession();
+		UserVO loginUser = (UserVO)hs.getAttribute("loginUser");
+		if(loginUser != null) { //로그인 상태 
+			response.sendRedirect("/board/list");
+			return;
+		}
+	}
+	
 	public static void openJSP(String fileNe,HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 		
 		String jsp = "/WEB-INF/view/"+fileNe+".jsp";

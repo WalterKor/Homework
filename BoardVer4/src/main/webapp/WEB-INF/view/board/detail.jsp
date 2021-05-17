@@ -19,10 +19,46 @@
 	
 	<c:if test="${loginUser.iuser == data.iuser}">
 		<div>
-			<button><a href="/board/del?iboard=${param.iboard}">삭제</button>
-			<button><a href="/board/mod?iboard=${param.iboard}">수정</button>			
+			<a href="/board/del?iboard=${param.iboard}"><button>삭제</button></a>
+			<a href="/board/mod?iboard=${param.iboard}"><button>수정</button></a>			
 		</div>
 	</c:if>	
+	
+	<h3>댓글</h3>
+	
+		<form action="/board/cmt" method="post">
+			<input type="hidden" name="iboard" value="${requestScope.data.iboard}">
+		<div>
+			<textarea name="cmt" placeholder="글을 작성해주세요"></textarea>
+			<input type="submit" value="댓글등록">
+		</div>
+		</form>
+		
+		<table>
+			<tr>
+				<th>내용</th>
+				<th>작성자</th>
+				<th>작성일</th>
+				<th>비고</th>
+			</tr> 
+			
+			<c:forEach var="item" items="${requestScope.cmtList}">
+				<tr>
+					<td>${item.cmt}</td>
+					<td>${item.unm}</td>
+					<td>${item.regdate}</td>
+					<td>
+						<c:if test="${item.iuser == sessionScope.loginUser.iuser}">
+							<input type="button" value="수정">
+							<button onclick="delCmt(${requestScope.data.iboard}, ${item.icmt});"></button> 
+						</c:if>
+					</td>
+				</tr>
+			</c:forEach>
+			
+						
+		</table>
+	
 	
 </body>
 </html>

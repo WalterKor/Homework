@@ -6,16 +6,9 @@
 <head>
 <meta charset="UTF-8">
 <title>리스트</title>
-<style>
-		table, th, td {
-			border: 1px solid black;
-			border-collapse: collapse; 
-		}
-		.record{cursor: pointer;}
-		.record:hover {background: red; }
-		
-	</style>
-
+<!--?ver=1 캐쉬데이터로인해 제대로 작동하지 않았을경우-->
+<link rel="stylesheet" href="/res/css/boardList.css?ver=1">
+<script defer="defer" src="/res/js/boardList.js"></script>
 </head>
 <body></body>
 	<div>로그인 성공</div>
@@ -44,12 +37,6 @@
 					</tr>			
 			</c:forEach>
 		</table>
-		<script >
-			function moveToDetail(iboard) {
-				//띄워쓰기 주의
-				location.href='/board/detail?iboard=' +iboard ;
-				
-			}
-		</script>
+	
 	</div>
 </html>

@@ -17,15 +17,9 @@ public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//홍준이한테 질문하
-		//로그인이 되어있는 상태인지 아닌지 확인하고 
-		HttpSession hs = request.getSession();
-		UserVO loginUser = (UserVO)hs.getAttribute("loginUser");
-		if(loginUser != null) { //로그인 상태 
-			response.sendRedirect("/board/list");
-			return;
-		}
 		
+		MyUtils.gotoLogin(request, response);
+
 		
 		MyUtils.openJSP("user/login", request, response);
 	}

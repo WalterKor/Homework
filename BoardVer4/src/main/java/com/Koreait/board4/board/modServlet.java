@@ -52,7 +52,6 @@ public class modServlet extends HttpServlet {
 		response.sendRedirect("/board/detail?iboard="+iboard);
 		
 		
-		
 	}
 
 }

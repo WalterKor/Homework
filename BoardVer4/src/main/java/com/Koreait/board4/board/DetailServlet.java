@@ -16,7 +16,9 @@ public class DetailServlet extends HttpServlet {
        
  
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+		
+	
+	
 	int iboard = MyUtils.getParamInt("iboard", request);
 	BoardVo data = BoardDAO.pickboard(iboard);
 	
