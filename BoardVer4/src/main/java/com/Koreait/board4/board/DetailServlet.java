@@ -24,8 +24,8 @@ public class DetailServlet extends HttpServlet {
 	int iboard = MyUtils.getParamInt("iboard", request);
 	BoardVo data = BoardDAO.pickboard(iboard);
 	
-	request.setAttribute("data", data);
-	request.setAttribute("cmtList", CmtDAO.selCmtList(iboard));
+	request.setAttribute("data", data);//글의정보
+	request.setAttribute("cmtList", CmtDAO.selCmtList(iboard));//댓글의 정보
 	
 	MyUtils.openJSP("board/detail", request, response);
 	

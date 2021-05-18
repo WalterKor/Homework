@@ -1,33 +1,36 @@
-package com.korea.board;
+package com.korea.board.board;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.Koreait.board4.MyUtils;
 
-@WebServlet("/list3") 
-public class ListServlet3 extends HttpServlet {
+
+@WebServlet("/board/del")
+public class DeletServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
+    
+	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-		List<BoardVO3> list = BoardDAO.AllSelect();
-		request.setAttribute("list", list);
-				
-		MyUtils.openJsp("list3", request, response);
+	
+		int iboard = MyUtils.getParamInt("iboard", request);
+		int iuser = MyUtils.getLoginUserPk(request);
 		
+		BoardVo bo = new BoardVo();
 		
+		bo.setIboard(iboard);
+		bo.setIuser(iuser);
 		
+		BoardDAO.remove(bo);
+		response.sendRedirect("/board/list");
 		
-		//request.getRequestDispatcher(jsp).forward(request, response);
 		
 	}
 
-
+	
 }

@@ -6,9 +6,11 @@
 <head>
 <meta charset="UTF-8">
 <title>${data.title}</title>
-<script defer src="/res/js/boardDetail.js?ver=5"></script>
+<script defer src="/res/js/boardDetail.js?ver=7"></script>
 <link rel="stylesheet" href="/res/css/boardList.css?ver=1">
-
+<style>
+ .hidden{ display: none; }
+</style>
 </head>
 <body>
 	<h1>디테일페이지</h1>
@@ -28,14 +30,25 @@
 	</c:if>	
 	
 	<h3>댓글</h3>
-	
-		<form action="/board/cmt" method="post">
+		
+	<form id="insFrm" action="cmt" method="post">
+			<input type="hidden" name="icmt" value="0">
 			<input type="hidden" name="iboard" value="${requestScope.data.iboard}">
 		<div>
 			<textarea name="cmt" placeholder="글을 작성해주세요"></textarea>
 			<input type="submit" value="댓글등록">
 		</div>
-		</form>
+	</form>
+		
+	<form id="updFrm" action="cmt" method="post" class="hidden">
+			<input type="hidden" name="icmt" value="0">
+			<input type="hidden" name="iboard" value="${requestScope.data.iboard}">
+		<div>
+			<textarea name="cmt" placeholder="댓글내용"></textarea>
+			<input type="submit" value="댓글수정">
+			<input type="button" value="수정취소" onclick="showInsFrm()">
+		</div>
+	</form>
 		
 		<table>
 			<tr>
@@ -53,7 +66,7 @@
 					<td>${item.regdate}</td>
 					<td>
 						<c:if test="${item.iuser == sessionScope.loginUser.iuser}">
-							<input type="button" value="수정">
+							<input type="button" value="수정" onclick="updCmt(${item.icmt},'${item.cmt.trim()}')">
 							<button onclick="delCmt(${requestScope.data.iboard}, ${item.icmt})">삭제</button> 
 						</c:if>
 					</td>
