@@ -6,6 +6,9 @@
 <head>
 <meta charset="UTF-8">
 <title>${data.title}</title>
+<script defer src="/res/js/boardDetail.js?ver=5"></script>
+<link rel="stylesheet" href="/res/css/boardList.css?ver=1">
+
 </head>
 <body>
 	<h1>디테일페이지</h1>
@@ -42,15 +45,16 @@
 				<th>비고</th>
 			</tr> 
 			
+			
 			<c:forEach var="item" items="${requestScope.cmtList}">
-				<tr>
+				<tr class="record">
 					<td>${item.cmt}</td>
 					<td>${item.unm}</td>
 					<td>${item.regdate}</td>
 					<td>
 						<c:if test="${item.iuser == sessionScope.loginUser.iuser}">
 							<input type="button" value="수정">
-							<button onclick="delCmt(${requestScope.data.iboard}, ${item.icmt});"></button> 
+							<button onclick="delCmt(${requestScope.data.iboard}, ${item.icmt})">삭제</button> 
 						</c:if>
 					</td>
 				</tr>

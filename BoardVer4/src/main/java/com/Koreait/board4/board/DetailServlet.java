@@ -8,6 +8,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.Koreait.board4.MyUtils;
+import com.Koreait.board4.cmt.CmtDAO;
+
 
 
 @WebServlet("/board/detail")
@@ -23,8 +25,10 @@ public class DetailServlet extends HttpServlet {
 	BoardVo data = BoardDAO.pickboard(iboard);
 	
 	request.setAttribute("data", data);
+	request.setAttribute("cmtList", CmtDAO.selCmtList(iboard));
 	
 	MyUtils.openJSP("board/detail", request, response);
+	
 	}
 	
 }
