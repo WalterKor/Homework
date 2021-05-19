@@ -1,6 +1,6 @@
-package com.Koreait.board4.user;
+package BoardCopy.User;
 
-public class UserVO {//레코드 하나를 저장할 수 있는것
+public class UserVo {
 	private int iuser;
 	private int gender;
 	private String uid;
@@ -12,6 +12,12 @@ public class UserVO {//레코드 하나를 저장할 수 있는것
 	}
 	public void setIuser(int iuser) {
 		this.iuser = iuser;
+	}
+	public int getGender() {
+		return gender;
+	}
+	public void setGender(int gender) {
+		this.gender = gender;
 	}
 	public String getUid() {
 		return uid;
@@ -30,12 +36,6 @@ public class UserVO {//레코드 하나를 저장할 수 있는것
 	}
 	public void setUnm(String unm) {
 		this.unm = unm;
-	}
-	public int getGender() {
-		return gender;
-	}
-	public void setGender(int gender) {
-		this.gender = gender;
 	}
 	public String getRegdt() {
 		return regdt;

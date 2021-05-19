@@ -121,7 +121,7 @@ public class BoardDAO {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}finally {
-			DBUtils.close(con, ps);
+			DBUtils.close(con, ps, rs);
 		}
 		return null;			
 	}
