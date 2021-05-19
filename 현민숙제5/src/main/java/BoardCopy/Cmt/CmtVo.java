@@ -6,6 +6,15 @@ public class CmtVo {
 	private int iuser;
 	private String cmt;
 	private String regdate;
+	private String unm;
+	
+	
+	public String getUnm() {
+		return unm;
+	}
+	public void setUnm(String unm) {
+		this.unm = unm;
+	}
 	public int getIcmt() {
 		return icmt;
 	}

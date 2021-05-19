@@ -149,4 +149,36 @@ public class BoardDAO {
 		
 	}
 
+	public static void update(BoardVO vo) {
+		
+		Connection con = null;
+		PreparedStatement ps = null;
+		String sql = " UPDATE t_board "
+				+ " SET title = ? "
+				+ " , ctnt = ? "
+				+ " WHERE iBoard = ? "
+				+ " AND Iuser = ? ";
+		
+		try {
+			con = DBUtils.getCon();
+			ps = con.prepareStatement(sql);
+			ps.setString(1, vo.getTitle());
+			ps.setString(2, vo.getCtnt());
+			ps.setInt(3, vo.getIboard());
+			ps.setInt(4, vo.getIuser());
+			
+			ps.executeUpdate();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			DBUtils.close(con, ps);
+		}
+		
+		
+		
+		
+		
+	}
+
 }

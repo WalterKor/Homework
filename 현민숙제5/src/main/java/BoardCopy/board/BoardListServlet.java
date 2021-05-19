@@ -11,8 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.jasper.tagplugins.jstl.core.ForEach;
-
 import BoardCopy.MyUtils;
+import BoardCopy.Cmt.CmtDAO;
 import BoardCopy.User.UserVo;
 
 
@@ -22,6 +22,7 @@ public class BoardListServlet extends HttpServlet {
        
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
 		HttpSession hs = request.getSession();
 		UserVo loginUser = (UserVo) hs.getAttribute("loginUser");
 		
@@ -31,6 +32,8 @@ public class BoardListServlet extends HttpServlet {
 		 }
 		
 		List<BoardVO> list = BoardDAO.AllselList();	
+		int iboard =MyUtils.getParamInt("iboard", request);
+		
 		
 		for (BoardVO boardVO : list) {
 			System.out.println(boardVO.getIboard());

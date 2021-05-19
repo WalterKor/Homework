@@ -27,5 +27,36 @@
 	</c:if>
 	
 	<h3>댓글창</h3>
+	<form id="insFrm" action="/cmt" method="post">
+		<input type="hidden" name="icmt" value="0">
+		<input type="hidden" name="iboard" value="${data.iboard}">
+		<div>
+			<textarea name="cmt" placeholder="댓글을 작성해주세요"></textarea>
+			<input type="submit" value="댓글작성">
+		</div>
+	</form>
+	
+	<table>
+		<tr>
+			<th>내용</th>
+			<th>작성자</th>
+			<th>작성일</th>
+			<th>비고</th>
+		</tr>
+		
+		<c:forEach var="item" items="${cmtList}">
+			<tr class="record">
+				<td>${item.cmt}</td>
+				<td>${item.unm}</td>
+				<td>${item.regdate}</td>
+				<td>
+					<c:if test="${item.iuser == loginUser.iuser}">
+						
+					</c:if>
+				</td>
+			</tr>
+		</c:forEach>
+	</table>
+	
 </body>
 </html>

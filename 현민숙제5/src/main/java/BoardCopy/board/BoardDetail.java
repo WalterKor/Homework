@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import BoardCopy.MyUtils;
+import BoardCopy.Cmt.CmtDAO;
 
 @WebServlet("/board/detail")
 public class BoardDetail extends HttpServlet {
@@ -30,6 +31,7 @@ public class BoardDetail extends HttpServlet {
 		
 		
 		request.setAttribute("data", data);
+		request.setAttribute("cmtList", CmtDAO.selCmtList(iboard));
 		MyUtils.openJSP("/board/boardDetail", request, response);
 		
 		
