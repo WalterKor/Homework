@@ -6,6 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <link rel="stylesheet" href="/res/css/boardList.css?ver=1">
+<script defer="defer" src="/res/js/boardDetail.js" ></script>
 <title>상세페이지</title>
 </head>
 <body>
@@ -27,6 +28,7 @@
 	</c:if>
 	
 	<h3>댓글창</h3>
+	
 	<form id="insFrm" action="/cmt" method="post">
 		<input type="hidden" name="icmt" value="0">
 		<input type="hidden" name="iboard" value="${data.iboard}">
@@ -51,7 +53,8 @@
 				<td>${item.regdate}</td>
 				<td>
 					<c:if test="${item.iuser == loginUser.iuser}">
-						
+						<input type="button" value="수정" onclick="udpCmdt(${item.icmt},${item.cmt.trim()})">
+						<button onclick="delcmt(${data.iboard}, ${item.icmt})">삭제</button>
 					</c:if>
 				</td>
 			</tr>

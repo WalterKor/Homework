@@ -78,24 +78,27 @@ public class BoardDAO {
 		
 	}
 
-	public static  BoardVo pickboard(int iboard) {
+	public static  BoardVo pickboard(BoardVo param) {
 		
 		Connection con = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 		
-		String sql = "SELECT a.iboard, a.title, a.ctnt, a.regdt,a.iuser,b.unm "
-				+ "FROM t_board a "
-				+ "LEFT JOIN t_user b "
-				+ "ON a.iuser = b.iuser "
-				+ " where iboard = ? ";
-				
+		String sql = 	"SELECT a.iboard, a.title, a.ctnt, a.regdt,a.iuser,b.unm , if(c.iuser IS NULL, 0 , 1) AS isFav"
+					+" FROM t_board a " 
+					+" LEFT JOIN t_user b " 
+					+" ON a.iuser = b.iuser " 
+					+" LEFT JOIN t_board_fav C "
+					+" ON a.iboard = c.iboard "
+					+" AND c.iuser =  ? "
+					+" WHERE a.iboard = ? "; 
 			
 		
 		try {
 			con = DBUtils.getCon();
 			ps = con.prepareStatement(sql);
-			ps.setInt(1, iboard);
+			ps.setInt(1, param.getIuser());
+			ps.setInt(2, param.getIboard());
 			rs = ps.executeQuery();
 			
 			if(rs.next()) {
@@ -107,13 +110,15 @@ public class BoardDAO {
 				String regdt = rs.getString("regdt");
 				int iuser = rs.getInt("iuser");
 				String unm = rs.getString("unm");
+				int isFav = rs.getInt("isFav");
 				
-				bo.setIboard(iboard);
+				bo.setIboard(param.getIboard());
 				bo.setTitle(title);
 				bo.setCtnt(ctnt);
 				bo.setRegdt(regdt);
 				bo.setUnm(unm);
 				bo.setIuser(iuser);
+				bo.setIsFav(isFav);
 				
 				return bo;
 			}

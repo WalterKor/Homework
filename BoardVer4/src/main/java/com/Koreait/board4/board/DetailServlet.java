@@ -20,9 +20,14 @@ public class DetailServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 	
-	
+	BoardVo vo = new BoardVo();
 	int iboard = MyUtils.getParamInt("iboard", request);
-	BoardVo data = BoardDAO.pickboard(iboard);
+	int iuser = MyUtils.getLoginUserPk(request);
+	
+	vo.setIboard(iboard);
+	vo.setIuser(iuser);
+	
+	BoardVo data = BoardDAO.pickboard(vo);
 	
 	request.setAttribute("data", data);//글의정보
 	request.setAttribute("cmtList", CmtDAO.selCmtList(iboard));//댓글의 정보

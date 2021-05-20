@@ -17,15 +17,19 @@ public class modServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		BoardVo vo = BoardDAO.pickboard(MyUtils.getParamInt("iboard", request));
+		BoardVo vo = new BoardVo(); 
+		int iboard = MyUtils.getParamInt("iboard", request);
+		vo.setIboard(iboard);
+		
+		vo = BoardDAO.pickboard(vo);
 		
 		if(vo.getIuser() != MyUtils.getLoginUserPk(request)) {
 			response.sendRedirect("/board/list");
 			return;
 		}
 		
-		int iboard = MyUtils.getParamInt("iboard", request);
-		BoardVo data = BoardDAO.pickboard(iboard);
+		
+		BoardVo data = BoardDAO.pickboard(vo);
 		request.setAttribute("data", data);
 		
 		MyUtils.openJSP("board/mod", request, response);

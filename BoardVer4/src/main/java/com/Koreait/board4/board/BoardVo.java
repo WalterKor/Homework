@@ -7,7 +7,15 @@ public class BoardVo {
 	private int iuser;
 	private String regdt;
 	
+	private int isFav;
 	
+	
+	public int getIsFav() {
+		return isFav;
+	}
+	public void setIsFav(int isFav) {
+		this.isFav = isFav;
+	}
 	private String unm;
 	
 	public String getUnm() {

@@ -13,15 +13,33 @@ import BoardCopy.MyUtils;
 @WebServlet("/cmt")
 public class CmtServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+    
+	//삭제
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	
-	
+		int iboard = MyUtils.getParamInt("iboard", request);
+		int icmt = MyUtils.getParamInt("icmt", request);
+		int iuser = MyUtils.getLoginUserPk(request);
+		
+		CmtVo vo = new CmtVo();
+		vo.setIboard(iboard);
+		vo.setIcmt(icmt);
+		vo.setIuser(iuser);
+		
+		CmtDAO.delCmt(vo);
+		
+		response.sendRedirect("detail?iboard=" +iboard);
+		
+		
+		
 	}
 
-	//글등록 , 삭제
+	//글등록 , 수정
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	
+		
+		String cmtt = request.getParameter("cmt");
+		
+		
 		int icmt = MyUtils.getParamInt("icmt", request);
 		
 		int iboard = MyUtils.getParamInt("iboard", request);
@@ -32,12 +50,12 @@ public class CmtServlet extends HttpServlet {
 		c.setCmt(cmt);
 		c.setIuser(iuser);
 		
-		if(icmt != 0) {
+		if(icmt != 0) {//수정
 			
 			c.setIcmt(icmt);
 			CmtDAO.updCmt(c);
 			
-		}else {
+		}else {//등록
 			c.setIboard(iboard);
 			CmtDAO.insertCmt(c);
 		}
