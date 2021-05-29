@@ -7,7 +7,7 @@
 <title>로그인</title>
 <style type="text/css">
 	.errMsg{ color: red};
-	body{
+	body{ 
 		background-color: coral;
 	}
 </style>
